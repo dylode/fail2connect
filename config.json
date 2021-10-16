@@ -1,0 +1,22 @@
+{
+  "watchers": [
+    {
+      "path_to_log_file": "/home/dylan/Desktop/VPN",
+      "connection_regex": "connection established with \\[.*\\](.*):",
+      "success_regex": "Peer Connection Initiated with \\[.*\\](.*):",
+      "ban_command": "echo \"IP_TO_BAN\" >> /home/dylan/Desktop/LOG",
+      "ultimatum_time_in_seconds": 10,
+      "trust_known": true,
+      "instant_ban_after": 3
+    },
+    {
+      "path_to_log_file": "/home/dylan/Desktop/postfix",
+      "connection_regex": "connect from \\[.*\\](.*):",
+      "success_regex": "client=\\[.*\\](.*):",
+      "ban_command": "echo \"IP_TO_BAN\" >> /home/dylan/Desktop/LOG",
+      "ultimatum_time_in_seconds": 30,
+      "trust_known": false,
+      "instant_ban_after": 3
+    }
+  ]
+}
