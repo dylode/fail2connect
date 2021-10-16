@@ -1,6 +1,7 @@
 {
   "watchers": [
     {
+      "enabled": true,
       "path_to_log_file": "/home/dylan/Desktop/VPN",
       "connection_regex": "connection established with \\[.*\\](.*):",
       "success_regex": "Peer Connection Initiated with \\[.*\\](.*):",
@@ -10,6 +11,7 @@
       "instant_ban_after": 3
     },
     {
+      "enabled": false,
       "path_to_log_file": "/home/dylan/Desktop/postfix",
       "connection_regex": "connect from \\[.*\\](.*):",
       "success_regex": "client=\\[.*\\](.*):",

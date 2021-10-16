@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fail2connect/config"
+	"fail2connect/watcher"
 	"fmt"
 	"github.com/akamensky/argparse"
 	"log"
@@ -23,17 +25,24 @@ func main() {
 	/// ---------
 	/// Parse config file
 	/// ---------
-	config, err := ParseConfig(*configFileLocation)
+	configuration, err := config.ParseConfig(*configFileLocation)
 
 	if err != nil {
 		log.Fatalln(err)
 	}
 
 	/// ---------
-	/// Setup watcher
+	/// Setup watchers
 	/// ---------
-	watchers := config.Watchers
-	fmt.Print(watchers[0].BanCommand)
+	var watchers []*watcher.Watcher
 
+	for _, watcherConfig := range configuration.Watchers {
+		if watcherConfig.Enabled {
+			watchers = append(watchers, watcher.New(watcherConfig))
+		}
+	}
 
+	for true {
+
+	}
 }
