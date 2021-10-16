@@ -7,6 +7,7 @@ import (
 	"github.com/akamensky/argparse"
 	"log"
 	"os"
+	"time"
 )
 
 func main() {
@@ -42,7 +43,14 @@ func main() {
 		}
 	}
 
+	/// ---------
+	/// Review connections
+	/// ---------
 	for true {
+		for _, watch := range watchers {
+			watch.Review()
+		}
 
+		time.Sleep(1 * time.Second)
 	}
 }

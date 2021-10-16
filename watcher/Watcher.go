@@ -5,7 +5,9 @@ import (
 	"github.com/hpcloud/tail"
 	"io"
 	"log"
+	"os/exec"
 	"regexp"
+	"strings"
 	"sync"
 	"time"
 )
@@ -59,7 +61,7 @@ func (w *Watcher) Analyze(line string) {
 
 	if connectionRegex.MatchString(line) {
 		ip := connectionRegex.FindStringSubmatch(line)[1]
-		log.Println("New connection from ", ip)
+		log.Println("New connection from", ip)
 
 		// If this Watcher trust known IPs, check if it is known. If it is, skip, since we trust this IP
 		if w.config.TrustKnown && Find(w.known, ip) {
@@ -82,7 +84,7 @@ func (w *Watcher) Analyze(line string) {
 		}
 	} else if successRegex.MatchString(line) {
 		ip := successRegex.FindStringSubmatch(line)[1]
-		log.Println("Successful connection from ", ip)
+		log.Println("Successful connection from", ip)
 		w.lock.Lock()
 		defer w.lock.Unlock()
 
@@ -92,6 +94,37 @@ func (w *Watcher) Analyze(line string) {
 			// If this Watcher trusts known IPs, add it to the known list
 			if w.config.TrustKnown && !Find(w.known, ip) {
 				w.known = append(w.known, ip)
+			}
+		}
+	}
+}
+
+func (w *Watcher) Review() {
+	now := time.Now()
+	connections := w.connections
+
+	w.lock.Lock()
+	defer w.lock.Unlock()
+
+	for ip, connection := range connections {
+		if connection.banned {
+			delete(w.connections, ip)
+			continue
+		}
+
+		difference := now.Sub(connection.connectedAt).Seconds()
+
+		if int(difference) >= w.config.UltimatumTimeInSeconds || connection.connectionTries >= w.config.InstantBanAfter {
+			command := strings.ReplaceAll(w.config.BanCommand, "IP_TO_BAN", ip)
+
+			err := exec.Command(command).Run()
+
+			if err != nil {
+				log.Println(err)
+			} else {
+				log.Println("BANNED", ip)
+				connection.banned = true
+				w.connections[ip] = connection
 			}
 		}
 	}
