@@ -85,6 +85,7 @@ func (w *Watcher) Analyze(line string) {
 	} else if successRegex.MatchString(line) {
 		ip := successRegex.FindStringSubmatch(line)[1]
 		log.Println("Successful connection from", ip)
+
 		w.lock.Lock()
 		defer w.lock.Unlock()
 
