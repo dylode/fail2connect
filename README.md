@@ -8,11 +8,11 @@ will match against a line that indicates that a connection with a certain IP add
 
 Example from OpenVPN:
 
-TCP connection established with [AF_INET]46.143.188.17:43912 (will match the first regular expression)
+``TCP connection established with [AF_INET]46.143.188.17:43912 (will match the first regular expression)
 ...
 ...
 ...
-Peer Connection Initiated with [AF_INET]46.143.188.17:43912 (will match the second regular expression)
+Peer Connection Initiated with [AF_INET]46.143.188.17:43912 (will match the second regular expression)``
 
 The first line mentions a new connection is made from some IP address, the second line mentions that that IP address
 successfully made a connection.
