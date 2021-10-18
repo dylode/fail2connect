@@ -23,16 +23,16 @@ because only connections from valid users will match the second line. If a conne
 match the second line.
 
 
-CONFIGURATION
-===========================================================
+## CONFIGURATION
+--------------------------------------------------------
 The config.json file is a JSON file containing multiple watchers. Each watcher is a JSON object containing the following
 keys:
 
-enabled (= should this watcher be enabled? true or false)
-path_to_log_file (= location of the log file)
-connection_regex (= regular expression for matching incoming, but not yet valid, connections. MUST HAVE A CAPTURE GROUP FOR THE IP ADDRESS)
-success_regex (= regular expression for matching connections from valid users. MUST HAVE A CAPTURE GROUP FOR THE IP ADDRESS)
-ban_command (= command to execute when there is too much time between the connection line and success line. IP_TO_BAN will be replaced with the corresponding IP address)
-ultimatum_time_in_seconds (= maximum time between connection and success line)
-trust_known (= should known IP addresses be trusted? true or false. This means that every IP address from the success regular expression will be trusted, meaning those IPs won't be banned even if it does not reach the success line next time)
-instant_ban_after (= in case of a DOS attack, after how many attempts within the ultimatum should the IP address be banned?)
+- enabled (should this watcher be enabled? true or false)
+- path_to_log_file (location of the log file)
+- connection_regex (egular expression for matching incoming, but not yet valid, connections. MUST HAVE A CAPTURE GROUP FOR THE IP ADDRESS)
+- success_regex (regular expression for matching connections from valid users. MUST HAVE A CAPTURE GROUP FOR THE IP ADDRESS)
+- ban_command (command to execute when there is too much time between the connection line and success line. IP_TO_BAN will be replaced with the corresponding IP address)
+- ultimatum_time_in_seconds (maximum time between connection and success line)
+- trust_known (should known IP addresses be trusted? true or false. This means that every IP address from the success regular expression will be trusted, meaning those IPs won't be banned even if it does not reach the success line next time)
+- instant_ban_after (in case of a DOS attack, after how many attempts within the ultimatum should the IP address be banned?)
