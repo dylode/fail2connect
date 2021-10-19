@@ -5,7 +5,7 @@
       "path_to_log_file": "/var/log/openvpn.log",
       "connection_regex": "connection established with \\[.*\\](.*):",
       "success_regex": "Peer Connection Initiated with \\[.*\\](.*):",
-      "ban_command": "ufw insert 1 deny from IP_TO_BAN comment \\\"Block for scanning VPN.\\\" && ss -K dst IP_TO_BAN",
+      "ban_command": ["./ban.sh", "IP_TO_BAN", "Block for scanning OpenVPN"],
       "ultimatum_time_in_seconds": 10,
       "trust_known": true,
       "instant_ban_after": 3
@@ -15,8 +15,8 @@
       "path_to_log_file": "/var/log/mail.log",
       "connection_regex": "connect from \\[.*\\](.*):",
       "success_regex": "client=\\[.*\\](.*):",
-      "ban_command": "ufw insert 1 deny from IP_TO_BAN comment \\\"Block for scanning Postfix.\\\" && ss -K dst IP_TO_BAN",
-      "ultimatum_time_in_seconds": 1800,
+      "ban_command": ["./ban.sh", "IP_TO_BAN", "\"Block for scanning Postfix\""],
+      "ultimatum_time_in_seconds": 180,
       "trust_known": false,
       "instant_ban_after": 3
     }

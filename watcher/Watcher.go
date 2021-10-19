@@ -7,7 +7,6 @@ import (
 	"log"
 	"os/exec"
 	"regexp"
-	"strings"
 	"sync"
 	"time"
 )
@@ -116,9 +115,17 @@ func (w *Watcher) Review() {
 		difference := now.Sub(connection.connectedAt).Seconds()
 
 		if int(difference) >= w.config.UltimatumTimeInSeconds || connection.connectionTries >= w.config.InstantBanAfter {
-			command := strings.ReplaceAll(w.config.BanCommand, "IP_TO_BAN", ip)
+			var command []string
 
-			err := exec.Command(command).Run()
+			for _, piece := range w.config.BanCommand {
+				if piece == "IP_TO_BAN" {
+					command = append(command, ip)
+				} else {
+					command = append(command, piece)
+				}
+			}
+
+			err := exec.Command(command[0], command[1:]...).Run()
 
 			if err != nil {
 				log.Println(err)

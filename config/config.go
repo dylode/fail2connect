@@ -11,14 +11,14 @@ type Config struct {
 }
 
 type WatcherConfig struct {
-	Enabled                bool   `json:"enabled"`
-	PathToLogFile          string `json:"path_to_log_file"`
-	ConnectionRegex        string `json:"connection_regex"`
-	SuccessRegex           string `json:"success_regex"`
-	BanCommand             string `json:"ban_command"`
-	UltimatumTimeInSeconds int    `json:"ultimatum_time_in_seconds"`
-	TrustKnown             bool   `json:"trust_known"`
-	InstantBanAfter        int    `json:"instant_ban_after"`
+	Enabled                bool     `json:"enabled"`
+	PathToLogFile          string   `json:"path_to_log_file"`
+	ConnectionRegex        string   `json:"connection_regex"`
+	SuccessRegex           string   `json:"success_regex"`
+	BanCommand             []string `json:"ban_command"`
+	UltimatumTimeInSeconds int      `json:"ultimatum_time_in_seconds"`
+	TrustKnown             bool     `json:"trust_known"`
+	InstantBanAfter        int      `json:"instant_ban_after"`
 }
 
 func ParseConfig(configFileLocation string) (*Config, error) {
