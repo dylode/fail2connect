@@ -15,7 +15,7 @@
       "path_to_log_file": "/var/log/mail.log",
       "connection_regex": "connect from \\[.*\\](.*):",
       "success_regex": "client=\\[.*\\](.*):",
-      "ban_command": ["./ban.sh", "IP_TO_BAN", "\"Block for scanning Postfix\""],
+      "ban_command": ["./ban.sh", "IP_TO_BAN", "Block for scanning Postfix"],
       "ultimatum_time_in_seconds": 180,
       "trust_known": false,
       "instant_ban_after": 3
