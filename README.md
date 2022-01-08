@@ -1,4 +1,4 @@
-Fail2Connect - Ban connections that fail to connect!
+Fail2Connect - Ban connections that fail to connect
 ===========================================================
 Fail2Connect is a program written in Golang. It reads log files like /var/log/openvpn.log or /var/log/mail.log. Each time
 a new line is added, Fail2Connect will try to match the new line against two regular expressions. These regular expressions are
